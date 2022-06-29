@@ -1,5 +1,7 @@
+import 'package:ffxiv_opener/models/ability_data.dart';
 import 'package:ffxiv_opener/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'color_scheme.g.dart';
 
@@ -13,13 +15,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
-      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const Home(),
-      },
+    return ChangeNotifierProvider(
+      create: (context) => AbilityData(),
+      child: MaterialApp(
+        theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+        darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const Home(),
+        },
+      ),
     );
   }
 }

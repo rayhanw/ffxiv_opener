@@ -36,10 +36,7 @@ class AbilityAction extends StatelessWidget {
       );
     }
 
-    return LongPressDraggable(
-      feedback: ActionImage(url: ability.url, off: ability.off),
-      child: ActionImage(url: ability.url, off: ability.off),
-    );
+    return ActionImage(url: ability.url, off: ability.off);
   }
 }
 
