@@ -1,20 +1,12 @@
+import 'package:ffxiv_opener/models/ability.dart';
 import 'package:flutter/material.dart';
 
 class AbilityAction extends StatelessWidget {
-  final String name;
-  final String category;
-  final String url;
+  final Ability ability;
   final bool complete;
-  final bool off;
 
-  const AbilityAction({
-    Key? key,
-    required this.name,
-    required this.category,
-    required this.url,
-    this.complete = true,
-    this.off = false,
-  }) : super(key: key);
+  const AbilityAction({Key? key, required this.ability, this.complete = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +15,16 @@ class AbilityAction extends StatelessWidget {
         width: 200.0,
         child: Row(
           children: <Widget>[
-            ActionImage(url: url, off: off),
+            ActionImage(url: ability.url, off: ability.off),
             const SizedBox(width: 16.0),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(ability.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
                 Text(
-                  category,
+                  ability.category,
                   style: const TextStyle(
                     fontWeight: FontWeight.w300,
                   ),
@@ -43,11 +36,10 @@ class AbilityAction extends StatelessWidget {
       );
     }
 
-    if (off) {
-      ActionImage(url: url, off: true);
-    }
-
-    return ActionImage(url: url, off: off);
+    return LongPressDraggable(
+      feedback: ActionImage(url: ability.url, off: ability.off),
+      child: ActionImage(url: ability.url, off: ability.off),
+    );
   }
 }
 
@@ -63,10 +55,10 @@ class ActionImage extends StatelessWidget {
 
   double determineSize() {
     if (off) {
-      return 50;
+      return 70;
     }
 
-    return 60;
+    return 80;
   }
 
   @override
