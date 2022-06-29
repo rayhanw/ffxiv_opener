@@ -1,43 +1,33 @@
 import 'dart:collection';
+import 'dart:convert';
 
 import 'package:ffxiv_opener/models/ability.dart';
+import 'package:ffxiv_opener/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class AbilityData extends ChangeNotifier {
-  late final List<Ability> _abilities = [
-    const Ability(
-      name: 'Gnashing Fang',
-      category: 'Weaponskill',
-      off: true,
-      url: 'https://ffxiv.gamerescape.com/w/images/6/62/Gnashing_Fang_Icon.png',
-    ),
-  ];
-  // late final List<Ability> _abilities = [
-  //   Ability(
-  //     name: 'Double Down',
-  //     category: 'Weaponskill',
-  //     url: 'https://ffxiv.gamerescape.com/w/images/6/65/Double_Down_Icon.png',
-  //     off: false,
-  //   ),
-  //   Ability(
-  //     name: 'No Mercy',
-  //     category: 'Ability',
-  //     off: true,
-  //     url: 'https://ffxiv.gamerescape.com/w/images/8/89/No_Mercy_Icon.png',
-  //   ),
-  //   Ability(
-  //     name: 'Gnashing Fang',
-  //     category: 'Weaponskill',
-  //     off: true,
-  //     url: 'https://ffxiv.gamerescape.com/w/images/6/62/Gnashing_Fang_Icon.png',
-  //   ),
-  //   Ability(
-  //     name: 'Jugular Rip',
-  //     category: 'Ability',
-  //     off: false,
-  //     url: 'https://ffxiv.gamerescape.com/w/images/0/05/Jugular_Rip_Icon.png',
-  //   ),
-  // ];
+  late List<Ability> _abilities = [];
+
+  Future<void> loadInitial() async {
+    String urlStr = getJobActions(Job.gnb);
+    Uri uri = Uri.parse(urlStr);
+    http.Response response = await http.get(uri);
+    Map<String, dynamic> result = jsonDecode(response.body);
+    List<dynamic> actions = result['Results'];
+
+    List<Ability> abilities = actions.map((action) {
+      return Ability(
+        id: action['ID'],
+        category: action['UrlType'],
+        url: buildActionIcon(action['Icon']),
+        name: action['Name'],
+        off: false,
+      );
+    }).toList();
+
+    _abilities = abilities;
+  }
 
   UnmodifiableListView<Ability> all() {
     return UnmodifiableListView(_abilities);
@@ -50,6 +40,27 @@ class AbilityData extends ChangeNotifier {
 
   void remove(int index) {
     _abilities.removeAt(index);
+    notifyListeners();
+  }
+
+  void swapJobs(Job job) async {
+    String urlStr = getJobActions(job);
+    Uri uri = Uri.parse(urlStr);
+    http.Response response = await http.get(uri);
+    Map<String, dynamic> result = jsonDecode(response.body);
+    List<dynamic> actions = result['Results'];
+
+    List<Ability> abilities = actions.map((action) {
+      return Ability(
+        id: action['ID'],
+        category: action['UrlType'],
+        url: buildActionIcon(action['Icon']),
+        name: action['Name'],
+        off: false,
+      );
+    }).toList();
+
+    _abilities = abilities;
     notifyListeners();
   }
 }

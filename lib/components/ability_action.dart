@@ -11,27 +11,36 @@ class AbilityAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (complete) {
-      return SizedBox(
-        width: 200.0,
-        child: Row(
-          children: <Widget>[
-            ActionImage(url: ability.url, off: ability.off),
-            const SizedBox(width: 16.0),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(ability.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                Text(
-                  ability.category,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w300,
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: SizedBox(
+          width: 160.0,
+          child: Row(
+            children: <Widget>[
+              ActionImage(url: ability.url, off: ability.off),
+              const SizedBox(width: 8),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    ability.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  Text(
+                    ability.category,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -52,10 +61,10 @@ class ActionImage extends StatelessWidget {
 
   double determineSize() {
     if (off) {
-      return 70;
+      return 40;
     }
 
-    return 80;
+    return 60;
   }
 
   @override
@@ -66,6 +75,7 @@ class ActionImage extends StatelessWidget {
         url,
         width: determineSize(),
         height: determineSize(),
+        fit: BoxFit.fitWidth,
       ),
     );
   }
