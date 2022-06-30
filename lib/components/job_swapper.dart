@@ -1,38 +1,127 @@
-import 'package:ffxiv_opener/models/ability_data.dart';
-import 'package:ffxiv_opener/models/timeline_data.dart';
+import 'package:ffxiv_opener/components/job_button.dart';
 import 'package:ffxiv_opener/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class JobSwapper extends StatelessWidget {
+class JobSwapper extends StatefulWidget {
   const JobSwapper({Key? key}) : super(key: key);
 
-  void clearTimeline(BuildContext context) {
-    Provider.of<TimelineData>(
-      context,
-      listen: false,
-    ).clear();
+  @override
+  State<JobSwapper> createState() => _JobSwapperState();
+}
+
+class _JobSwapperState extends State<JobSwapper> {
+  Job activeJob = Job.gnb;
+
+  void setActiveJob(Job job) {
+    setState(() {
+      activeJob = job;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        TankJobsSwapper(clearTimeline: clearTimeline),
-        HealerJobsSwapper(clearTimeline: clearTimeline),
-        MeleeJobsSwapper(clearTimeline: clearTimeline),
-        PhysicalRangeJobsSwapper(clearTimeline: clearTimeline),
-        CasterJobsSwapper(clearTimeline: clearTimeline),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Tanks',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                color: tankColor,
+              ),
+            ),
+            TankJobsSwapper(
+              activeJob: activeJob,
+              setActiveJob: setActiveJob,
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Healers',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                color: healerColor,
+              ),
+            ),
+            HealerJobsSwapper(
+              activeJob: activeJob,
+              setActiveJob: setActiveJob,
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Melees',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                color: dpsColor,
+              ),
+            ),
+            MeleeJobsSwapper(
+              activeJob: activeJob,
+              setActiveJob: setActiveJob,
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Physical Range',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                color: dpsColor,
+              ),
+            ),
+            PhysicalRangeJobsSwapper(
+              activeJob: activeJob,
+              setActiveJob: setActiveJob,
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Casters',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                color: dpsColor,
+              ),
+            ),
+            CasterJobsSwapper(
+              activeJob: activeJob,
+              setActiveJob: setActiveJob,
+            ),
+          ],
+        ),
       ],
     );
   }
 }
 
 class TankJobsSwapper extends StatelessWidget {
-  final Function(BuildContext) clearTimeline;
+  final Function setActiveJob;
+  final Job activeJob;
 
-  const TankJobsSwapper({Key? key, required this.clearTimeline})
-      : super(key: key);
+  const TankJobsSwapper({
+    Key? key,
+    required this.setActiveJob,
+    required this.activeJob,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,45 +129,33 @@ class TankJobsSwapper extends StatelessWidget {
       spacing: 16.0,
       alignment: WrapAlignment.start,
       children: <Widget>[
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.gnb);
-            clearTimeline(context);
-          },
-          child: const Text('GNB'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.gnb,
+          name: 'GNB',
+          setActiveJob: setActiveJob,
+          category: Category.tank,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.war);
-            clearTimeline(context);
-          },
-          child: const Text('WAR'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.drk,
+          name: 'DRK',
+          setActiveJob: setActiveJob,
+          category: Category.tank,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.drk);
-            clearTimeline(context);
-          },
-          child: const Text('DRK'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.war,
+          name: 'WAR',
+          setActiveJob: setActiveJob,
+          category: Category.tank,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.pld);
-            clearTimeline(context);
-          },
-          child: const Text('PLD'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.pld,
+          name: 'PLD',
+          setActiveJob: setActiveJob,
+          category: Category.tank,
         ),
       ],
     );
@@ -86,10 +163,14 @@ class TankJobsSwapper extends StatelessWidget {
 }
 
 class HealerJobsSwapper extends StatelessWidget {
-  final Function(BuildContext) clearTimeline;
+  final Function setActiveJob;
+  final Job activeJob;
 
-  const HealerJobsSwapper({Key? key, required this.clearTimeline})
-      : super(key: key);
+  const HealerJobsSwapper({
+    Key? key,
+    required this.setActiveJob,
+    required this.activeJob,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,45 +178,33 @@ class HealerJobsSwapper extends StatelessWidget {
       spacing: 16.0,
       alignment: WrapAlignment.start,
       children: <Widget>[
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.whm);
-            clearTimeline(context);
-          },
-          child: const Text('WHM'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.whm,
+          name: 'WHM',
+          setActiveJob: setActiveJob,
+          category: Category.healer,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.sch);
-            clearTimeline(context);
-          },
-          child: const Text('SCH'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.sch,
+          name: 'SCH',
+          setActiveJob: setActiveJob,
+          category: Category.healer,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.ast);
-            clearTimeline(context);
-          },
-          child: const Text('AST'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.ast,
+          name: 'AST',
+          setActiveJob: setActiveJob,
+          category: Category.healer,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.sge);
-            clearTimeline(context);
-          },
-          child: const Text('SGE'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.sge,
+          name: 'SGE',
+          setActiveJob: setActiveJob,
+          category: Category.healer,
         ),
       ],
     );
@@ -143,10 +212,14 @@ class HealerJobsSwapper extends StatelessWidget {
 }
 
 class MeleeJobsSwapper extends StatelessWidget {
-  final Function(BuildContext) clearTimeline;
+  final Function setActiveJob;
+  final Job activeJob;
 
-  const MeleeJobsSwapper({Key? key, required this.clearTimeline})
-      : super(key: key);
+  const MeleeJobsSwapper({
+    Key? key,
+    required this.setActiveJob,
+    required this.activeJob,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -154,45 +227,40 @@ class MeleeJobsSwapper extends StatelessWidget {
       spacing: 16.0,
       alignment: WrapAlignment.start,
       children: <Widget>[
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.mnk);
-            clearTimeline(context);
-          },
-          child: const Text('MNK'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.mnk,
+          name: 'MNK',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.sam);
-            clearTimeline(context);
-          },
-          child: const Text('SAM'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.sam,
+          name: 'SAM',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.rpr);
-            clearTimeline(context);
-          },
-          child: const Text('RPR'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.rpr,
+          name: 'RPR',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.drg);
-            clearTimeline(context);
-          },
-          child: const Text('DRG'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.drg,
+          name: 'DRG',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
+        ),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.nin,
+          name: 'NIN',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
       ],
     );
@@ -200,10 +268,14 @@ class MeleeJobsSwapper extends StatelessWidget {
 }
 
 class PhysicalRangeJobsSwapper extends StatelessWidget {
-  final Function(BuildContext) clearTimeline;
+  final Function setActiveJob;
+  final Job activeJob;
 
-  const PhysicalRangeJobsSwapper({Key? key, required this.clearTimeline})
-      : super(key: key);
+  const PhysicalRangeJobsSwapper({
+    Key? key,
+    required this.setActiveJob,
+    required this.activeJob,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -211,35 +283,26 @@ class PhysicalRangeJobsSwapper extends StatelessWidget {
       spacing: 16.0,
       alignment: WrapAlignment.start,
       children: <Widget>[
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.mch);
-            clearTimeline(context);
-          },
-          child: const Text('MCH'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.mch,
+          name: 'MCH',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.brd);
-            clearTimeline(context);
-          },
-          child: const Text('BRD'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.dnc,
+          name: 'DNC',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.dnc);
-            clearTimeline(context);
-          },
-          child: const Text('DNC'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.brd,
+          name: 'BRD',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
       ],
     );
@@ -247,46 +310,40 @@ class PhysicalRangeJobsSwapper extends StatelessWidget {
 }
 
 class CasterJobsSwapper extends StatelessWidget {
-  final Function(BuildContext) clearTimeline;
+  final Function setActiveJob;
+  final Job activeJob;
 
-  const CasterJobsSwapper({Key? key, required this.clearTimeline})
-      : super(key: key);
+  const CasterJobsSwapper({
+    Key? key,
+    required this.setActiveJob,
+    required this.activeJob,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       spacing: 16.0,
-      alignment: WrapAlignment.start,
       children: <Widget>[
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.blm);
-            clearTimeline(context);
-          },
-          child: const Text('BLM'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.blm,
+          name: 'BLM',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.rdm);
-            clearTimeline(context);
-          },
-          child: const Text('RDM'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.rdm,
+          name: 'RDM',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Provider.of<AbilityData>(
-              context,
-              listen: false,
-            ).swapJobs(Job.smn);
-            clearTimeline(context);
-          },
-          child: const Text('SMN'),
+        JobButton(
+          activeJob: activeJob,
+          job: Job.smn,
+          name: 'SMN',
+          setActiveJob: setActiveJob,
+          category: Category.dps,
         ),
       ],
     );

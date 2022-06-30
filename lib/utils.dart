@@ -25,6 +25,12 @@ enum Job {
   smn,
 }
 
+enum Category {
+  tank,
+  healer,
+  dps,
+}
+
 String getJobActions(Job job) {
   switch (job) {
     case Job.war:
