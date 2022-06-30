@@ -1,5 +1,6 @@
 import 'package:ffxiv_opener/components/ability_action.dart';
 import 'package:ffxiv_opener/components/ability_timeline.dart';
+import 'package:ffxiv_opener/components/job_swapper.dart';
 import 'package:ffxiv_opener/models/ability.dart';
 import 'package:ffxiv_opener/models/ability_data.dart';
 import 'package:ffxiv_opener/utils.dart';
@@ -44,48 +45,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Wrap(
-              spacing: 16.0,
-              alignment: WrapAlignment.start,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    Provider.of<AbilityData>(
-                      context,
-                      listen: false,
-                    ).swapJobs(Job.gnb);
-                  },
-                  child: const Text('GNB'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Provider.of<AbilityData>(
-                      context,
-                      listen: false,
-                    ).swapJobs(Job.war);
-                  },
-                  child: const Text('WAR'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Provider.of<AbilityData>(
-                      context,
-                      listen: false,
-                    ).swapJobs(Job.drk);
-                  },
-                  child: const Text('DRK'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Provider.of<AbilityData>(
-                      context,
-                      listen: false,
-                    ).swapJobs(Job.pld);
-                  },
-                  child: const Text('PLD'),
-                ),
-              ],
-            ),
+            child: const JobSwapper(),
           ),
           Expanded(
             child: Container(

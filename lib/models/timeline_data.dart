@@ -15,8 +15,13 @@ class TimelineData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void remove({required int index}) {
+  void remove(int index) {
     _timeline.removeAt(index);
+    notifyListeners();
+  }
+
+  void clear() {
+    _timeline.clear();
     notifyListeners();
   }
 }

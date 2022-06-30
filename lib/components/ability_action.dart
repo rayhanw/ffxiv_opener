@@ -1,5 +1,7 @@
 import 'package:ffxiv_opener/models/ability.dart';
+import 'package:ffxiv_opener/models/timeline_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AbilityAction extends StatelessWidget {
   final Ability ability;
@@ -19,25 +21,34 @@ class AbilityAction extends StatelessWidget {
             children: <Widget>[
               ActionImage(url: ability.url, off: ability.off),
               const SizedBox(width: 8),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    ability.name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
+              TextButton(
+                onPressed: () {
+                  Provider.of<TimelineData>(
+                    context,
+                    listen: false,
+                  ).add(ability: ability);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      ability.name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  Text(
-                    ability.category,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 14.0,
+                    Text(
+                      ability.category,
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black54,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

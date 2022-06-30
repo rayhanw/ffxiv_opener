@@ -1,5 +1,5 @@
 import 'package:ffxiv_opener/models/ability.dart';
-import 'package:ffxiv_opener/models/ability_data.dart';
+import 'package:ffxiv_opener/models/timeline_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,8 +12,8 @@ class AbilityTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AbilityData>(builder: (context, abilityData, index) {
-      List<Ability> abilities = abilityData.all();
+    return Consumer<TimelineData>(builder: (context, timelineData, index) {
+      List<Ability> abilities = timelineData.all();
 
       return Container(
         color: const Color(0xFFc9c9c9),
@@ -26,7 +26,7 @@ class AbilityTimeline extends StatelessWidget {
             return MaterialButton(
               padding: const EdgeInsets.all(0),
               onPressed: () {
-                Provider.of<AbilityData>(context, listen: false).remove(index);
+                Provider.of<TimelineData>(context, listen: false).remove(index);
               },
               child: AbilityAction(ability: ability, complete: false),
             );
