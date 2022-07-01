@@ -3,7 +3,6 @@ import 'package:ffxiv_opener/components/ability_timeline.dart';
 import 'package:ffxiv_opener/components/job_swapper.dart';
 import 'package:ffxiv_opener/models/ability.dart';
 import 'package:ffxiv_opener/models/ability_data.dart';
-import 'package:ffxiv_opener/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -77,19 +76,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-// children: <Widget>[
-// MaterialButton(
-// padding: const EdgeInsets.all(0),
-
-// child: const AbilityAction(
-// ability: Ability(
-// id: 16138,
-// name: 'No Mercy',
-// category: 'Ability',
-// url:
-// 'https://ffxiv.gamerescape.com/w/images/8/89/No_Mercy_Icon.png',
-// ),
-// ),
-// ),
-// ],

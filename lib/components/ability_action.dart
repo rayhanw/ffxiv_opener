@@ -13,45 +13,39 @@ class AbilityAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (complete) {
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: SizedBox(
-          width: 160.0,
-          child: Row(
-            children: <Widget>[
-              ActionImage(url: ability.url, off: ability.off),
-              const SizedBox(width: 8),
-              TextButton(
-                onPressed: () {
-                  Provider.of<TimelineData>(
-                    context,
-                    listen: false,
-                  ).add(ability: ability);
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      ability.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      ability.category,
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ],
+      return TextButton(
+        onPressed: () {
+          Provider.of<TimelineData>(
+            context,
+            listen: false,
+          ).add(ability: ability);
+        },
+        child: Row(
+          children: <Widget>[
+            ActionImage(url: ability.url, off: ability.off),
+            const SizedBox(width: 8),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  ability.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-            ],
-          ),
+                Text(
+                  ability.category,
+                  style: const TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       );
     }
