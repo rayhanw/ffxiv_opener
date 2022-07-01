@@ -11,6 +11,7 @@ class JobSwapper extends StatefulWidget {
 
 class _JobSwapperState extends State<JobSwapper> {
   Job activeJob = Job.gnb;
+  double _jobSwapHeight = 0;
 
   void setActiveJob(Job job) {
     setState(() {
@@ -21,92 +22,138 @@ class _JobSwapperState extends State<JobSwapper> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Tanks',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
-                color: tankColor,
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              if (_jobSwapHeight == 0) {
+                _jobSwapHeight = 380;
+              } else {
+                _jobSwapHeight = 0;
+              }
+            });
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Jobs (${activeJob.toShortString()})',
+                style: const TextStyle(
+                    fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
-            ),
-            TankJobsSwapper(
-              activeJob: activeJob,
-              setActiveJob: setActiveJob,
-            ),
-          ],
+              const Icon(Icons.arrow_drop_down),
+            ],
+          ),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Healers',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
-                color: healerColor,
-              ),
+        AnimatedContainer(
+          height: _jobSwapHeight,
+          padding: const EdgeInsets.all(8),
+          curve: Curves.fastLinearToSlowEaseIn,
+          duration: const Duration(milliseconds: 1750),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4.0),
+            color: Colors.white60,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300,
+                spreadRadius: 1,
+                blurRadius: 15,
+                blurStyle: BlurStyle.outer,
+              )
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Tanks',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: tankColor,
+                      ),
+                    ),
+                    TankJobsSwapper(
+                      activeJob: activeJob,
+                      setActiveJob: setActiveJob,
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Healers',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: healerColor,
+                      ),
+                    ),
+                    HealerJobsSwapper(
+                      activeJob: activeJob,
+                      setActiveJob: setActiveJob,
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Melees',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: dpsColor,
+                      ),
+                    ),
+                    MeleeJobsSwapper(
+                      activeJob: activeJob,
+                      setActiveJob: setActiveJob,
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Physical Range',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: dpsColor,
+                      ),
+                    ),
+                    PhysicalRangeJobsSwapper(
+                      activeJob: activeJob,
+                      setActiveJob: setActiveJob,
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Casters',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: dpsColor,
+                      ),
+                    ),
+                    CasterJobsSwapper(
+                      activeJob: activeJob,
+                      setActiveJob: setActiveJob,
+                    ),
+                  ],
+                ),
+              ],
             ),
-            HealerJobsSwapper(
-              activeJob: activeJob,
-              setActiveJob: setActiveJob,
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Melees',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
-                color: dpsColor,
-              ),
-            ),
-            MeleeJobsSwapper(
-              activeJob: activeJob,
-              setActiveJob: setActiveJob,
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Physical Range',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
-                color: dpsColor,
-              ),
-            ),
-            PhysicalRangeJobsSwapper(
-              activeJob: activeJob,
-              setActiveJob: setActiveJob,
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Casters',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
-                color: dpsColor,
-              ),
-            ),
-            CasterJobsSwapper(
-              activeJob: activeJob,
-              setActiveJob: setActiveJob,
-            ),
-          ],
+          ),
         ),
       ],
     );

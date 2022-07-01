@@ -31,6 +31,12 @@ enum Category {
   dps,
 }
 
+extension ParseToString on Job {
+  String toShortString() {
+    return toString().split('.').last.toUpperCase();
+  }
+}
+
 String getJobActions(Job job) {
   switch (job) {
     case Job.war:
