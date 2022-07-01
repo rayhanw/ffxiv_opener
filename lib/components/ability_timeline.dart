@@ -16,7 +16,7 @@ class AbilityTimeline extends StatelessWidget {
       List<Ability> abilities = timelineData.all();
 
       return Container(
-        color: const Color(0xFFc9c9c9),
+        color: Colors.grey.shade200,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: abilities.length,
