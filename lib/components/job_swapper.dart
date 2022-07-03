@@ -23,26 +23,29 @@ class _JobSwapperState extends State<JobSwapper> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ElevatedButton(
-          onPressed: () {
-            setState(() {
-              if (_jobSwapHeight == 0) {
-                _jobSwapHeight = 380;
-              } else {
-                _jobSwapHeight = 0;
-              }
-            });
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Jobs (${activeJob.toShortString()})',
-                style: const TextStyle(
-                    fontSize: 20.0, fontWeight: FontWeight.bold),
-              ),
-              const Icon(Icons.arrow_drop_down),
-            ],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+          child: ElevatedButton(
+            onPressed: () {
+              setState(() {
+                if (_jobSwapHeight == 0) {
+                  _jobSwapHeight = 380;
+                } else {
+                  _jobSwapHeight = 0;
+                }
+              });
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Jobs (${activeJob.toShortString()})',
+                  style: const TextStyle(
+                      fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
+                const Icon(Icons.arrow_drop_down),
+              ],
+            ),
           ),
         ),
         AnimatedContainer(

@@ -43,26 +43,36 @@ class _HomeState extends State<Home> {
             child: AbilityTimeline(),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            margin: const EdgeInsets.all(0),
             child: const JobSwapper(),
           ),
           Expanded(
             child: Container(
               margin:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                  const EdgeInsets.symmetric(horizontal: 2.0, vertical: 8.0),
               child: Consumer<AbilityData>(
                 builder: (_, abilityData, __) {
                   List<Ability> abilities = abilityData.all();
 
-                  return ListView.builder(
+                  return GridView.count(
+                    childAspectRatio: (1 / .3),
                     shrinkWrap: true,
-                    itemCount: abilities.length,
-                    itemBuilder: (BuildContext context, int index) {
+                    crossAxisCount: 2,
+                    children: List.generate(abilities.length, (index) {
                       Ability ability = abilities[index];
 
                       return AbilityAction(ability: ability);
-                    },
+                    }),
                   );
+                  // return ListView.builder(
+                  //   shrinkWrap: true,
+                  //   itemCount: abilities.length,
+                  //   itemBuilder: (BuildContext context, int index) {
+                  //     Ability ability = abilities[index];
+                  //
+                  //     return AbilityAction(ability: ability);
+                  //   },
+                  // );
                 },
               ),
             ),

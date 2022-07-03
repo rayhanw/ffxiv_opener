@@ -13,39 +13,51 @@ class AbilityAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (complete) {
-      return TextButton(
-        onPressed: () {
-          Provider.of<TimelineData>(
-            context,
-            listen: false,
-          ).add(ability: ability);
-        },
-        child: Row(
-          children: <Widget>[
-            ActionImage(url: ability.url, off: ability.off),
-            const SizedBox(width: 8),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+      return SizedBox(
+        height: 60,
+        child: TextButton(
+          onPressed: () {
+            Provider.of<TimelineData>(
+              context,
+              listen: false,
+            ).add(ability: ability);
+          },
+          child: SizedBox(
+            height: 50,
+            child: Row(
               children: <Widget>[
-                Text(
-                  ability.name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                    color: Colors.black,
-                  ),
-                ),
-                Text(
-                  ability.category,
-                  style: const TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.black54,
-                  ),
+                ActionImage(url: ability.url, off: ability.off),
+                const SizedBox(width: 8),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 120,
+                      child: Text(
+                        ability.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      ability.category,
+                      style: const TextStyle(
+                        fontSize: 12.0,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
       );
     }
@@ -66,10 +78,10 @@ class ActionImage extends StatelessWidget {
 
   double determineSize() {
     if (off) {
-      return 40;
+      return 30;
     }
 
-    return 60;
+    return 40;
   }
 
   @override
