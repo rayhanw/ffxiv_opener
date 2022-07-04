@@ -31,6 +31,8 @@ class _HomeState extends State<Home> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -57,12 +59,15 @@ class _HomeState extends State<Home> {
                   return GridView.count(
                     childAspectRatio: (1 / .3),
                     shrinkWrap: true,
-                    crossAxisCount: 2,
-                    children: List.generate(abilities.length, (index) {
-                      Ability ability = abilities[index];
+                    crossAxisCount: isPortrait ? 2 : 4,
+                    children: List.generate(
+                      abilities.length,
+                      (index) {
+                        Ability ability = abilities[index];
 
-                      return AbilityAction(ability: ability);
-                    }),
+                        return AbilityAction(ability: ability);
+                      },
+                    ),
                   );
                   // return ListView.builder(
                   //   shrinkWrap: true,

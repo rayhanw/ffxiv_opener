@@ -23,8 +23,7 @@ class AbilityTimeline extends StatelessWidget {
           itemBuilder: (context, int index) {
             Ability ability = abilities[index];
 
-            return MaterialButton(
-              padding: const EdgeInsets.all(0),
+            return TextButton(
               onPressed: () {
                 Provider.of<TimelineData>(context, listen: false).remove(index);
               },

@@ -19,7 +19,7 @@ class AbilityData extends ChangeNotifier {
     List<Ability> abilities = actions.map((action) {
       return Ability(
         id: action['ID'],
-        category: action['UrlType'],
+        category: gcd(action['CooldownGroup']),
         url: buildActionIcon(action['Icon']),
         name: action['Name'],
         off: false,

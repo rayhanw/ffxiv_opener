@@ -24,9 +24,15 @@ BLM: https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=25;7,Cla
 RDM: https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=35,ClassJobCategory.RDM=1
 SMN: https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=27;3,ClassJobCategory.SMN=1
 
-#### Additional filters/params:
+#### Additional filters:
 - IsPvP=0 -> Filter
+
+#### Additional params:
 - sort_field=ClassJobLevel
+- Columns=Name,CooldownGroup,Icon,ID
 
 ## Full Example:
-WAR: https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=21;3,ClassJobCategory.WAR=1,IsPvP=0&sort_field=ClassJobLevel
+WAR: https://xivapi.com/search?
+     indexes=Action&
+     filters=ClassJobTargetID|=21;3,ClassJobCategory.WAR=1,IsPvP=0&
+     sort_field=ClassJobLevel

@@ -38,46 +38,92 @@ extension ParseToString on Job {
 }
 
 String getJobActions(Job job) {
+  String url;
   switch (job) {
     case Job.war:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=21;3,ClassJobCategory.WAR=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=21;3,ClassJobCategory.WAR=1,IsPvP=0&';
+      break;
     case Job.gnb:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=37;3,ClassJobCategory.GNB=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=37;3,ClassJobCategory.GNB=1,IsPvP=0&';
+      break;
     case Job.drk:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=32;3,ClassJobCategory.DRK=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=32;3,ClassJobCategory.DRK=1,IsPvP=0&';
+      break;
     case Job.pld:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=19;3,ClassJobCategory.PLD=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=19;3,ClassJobCategory.PLD=1,IsPvP=0&';
+      break;
     case Job.whm:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=24;3,ClassJobCategory.WHM=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=24;3,ClassJobCategory.WHM=1,IsPvP=0&';
+      break;
     case Job.sch:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=28;3,ClassJobCategory.SCH=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=28;3,ClassJobCategory.SCH=1,IsPvP=0&';
+      break;
     case Job.ast:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=33;3,ClassJobCategory.AST=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=33;3,ClassJobCategory.AST=1,IsPvP=0&';
+      break;
     case Job.sge:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=40;3,ClassJobCategory.SGE=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=40;3,ClassJobCategory.SGE=1,IsPvP=0&';
+      break;
     case Job.mnk:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=20;2,ClassJobCategory.MNK=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=20;2,ClassJobCategory.MNK=1,IsPvP=0&';
+      break;
     case Job.sam:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=34;2,ClassJobCategory.SAM=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=34;2,ClassJobCategory.SAM=1,IsPvP=0&';
+      break;
     case Job.rpr:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=39;2,ClassJobCategory.RPR=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=39;2,ClassJobCategory.RPR=1,IsPvP=0&';
+      break;
     case Job.drg:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=22;2,ClassJobCategory.DRG=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=22;2,ClassJobCategory.DRG=1,IsPvP=0&';
+      break;
     case Job.nin:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=30;2,ClassJobCategory.NIN=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=30;2,ClassJobCategory.NIN=1,IsPvP=0&';
+      break;
     case Job.mch:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=31,ClassJobCategory.MCH=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=31,ClassJobCategory.MCH=1,IsPvP=0&';
+      break;
     case Job.dnc:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=38,ClassJobCategory.DNC=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=38,ClassJobCategory.DNC=1,IsPvP=0&';
+      break;
     case Job.brd:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=23;5,ClassJobCategory.BRD=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=23;5,ClassJobCategory.BRD=1,IsPvP=0&';
+      break;
     case Job.blm:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=25;7,ClassJobCategory.BLM=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=25;7,ClassJobCategory.BLM=1,IsPvP=0&';
+      break;
     case Job.rdm:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=35,ClassJobCategory.RDM=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=35,ClassJobCategory.RDM=1,IsPvP=0&';
+      break;
     case Job.smn:
-      return 'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=27;3,ClassJobCategory.SMN=1,IsPvP=0&sort_field=ClassJobLevel';
+      url =
+          'https://xivapi.com/search?indexes=Action&filters=ClassJobTargetID|=27;3,ClassJobCategory.SMN=1,IsPvP=0&';
+      break;
   }
+
+  List<String> additions = [
+    'sort_field=ClassJobLevel',
+    'Columns=Name,CooldownGroup,Icon,ID'
+  ];
+
+  return '$url${additions.join('&')}';
 }
 
 String buildActionIcon(String icon) {
@@ -85,3 +131,5 @@ String buildActionIcon(String icon) {
 
   return '$baseUrl$icon';
 }
+
+String gcd(int cooldownGroup) => cooldownGroup == 58 ? 'GCD' : 'oGCD';
