@@ -26,7 +26,7 @@ class AbilityAction extends StatelessWidget {
             height: 50,
             child: Row(
               children: <Widget>[
-                ActionImage(url: ability.url, off: ability.off),
+                ActionImage(url: ability.url),
                 const SizedBox(width: 8),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,7 +62,7 @@ class AbilityAction extends StatelessWidget {
       );
     }
 
-    return ActionImage(url: ability.url, off: ability.off);
+    return ActionImage(url: ability.url);
   }
 }
 
