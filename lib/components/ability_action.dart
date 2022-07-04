@@ -62,23 +62,23 @@ class AbilityAction extends StatelessWidget {
       );
     }
 
-    return ActionImage(url: ability.url);
+    return ActionImage(url: ability.url, isGcd: ability.isGcd);
   }
 }
 
 class ActionImage extends StatelessWidget {
   final String url;
-  final bool off;
+  final bool isGcd;
 
   const ActionImage({
     Key? key,
     required this.url,
-    this.off = false,
+    this.isGcd = true,
   }) : super(key: key);
 
   double determineSize() {
-    if (off) {
-      return 30;
+    if (!isGcd) {
+      return 35;
     }
 
     return 40;

@@ -10,4 +10,6 @@ class Ability {
     required this.category,
     required this.url,
   });
+
+  bool get isGcd => category == 'GCD';
 }
