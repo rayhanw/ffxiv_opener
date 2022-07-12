@@ -24,6 +24,8 @@ class AbilityTimeline extends StatelessWidget {
             Ability ability = abilities[index];
 
             return TextButton(
+              style: TextButton.styleFrom(
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap),
               onPressed: () {
                 Provider.of<TimelineData>(context, listen: false).remove(index);
               },

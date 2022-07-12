@@ -1,6 +1,7 @@
 import 'package:ffxiv_opener/models/ability_data.dart';
 import 'package:ffxiv_opener/models/timeline_data.dart';
 import 'package:ffxiv_opener/screens/home.dart';
+import 'package:ffxiv_opener/screens/rotations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const Home(),
+          '/rotations': (context) => const Rotations(),
         },
       ),
     );

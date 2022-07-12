@@ -1,5 +1,6 @@
 import 'package:ffxiv_opener/components/ability_action.dart';
 import 'package:ffxiv_opener/components/ability_timeline.dart';
+import 'package:ffxiv_opener/components/custom_drawer.dart';
 import 'package:ffxiv_opener/components/job_swapper.dart';
 import 'package:ffxiv_opener/models/ability.dart';
 import 'package:ffxiv_opener/models/ability_data.dart';
@@ -84,6 +85,7 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
+      drawer: const CustomDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {},
         child: const Icon(Icons.add),
